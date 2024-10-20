@@ -8,8 +8,9 @@ import { connectDB } from './config/ConnectDB.js';
 
 dotenv.config();
 
-const app = express();
 const PORT = process.env.PORT || 8000;
+const app = express();
+
 
 
 app.use(cors({
