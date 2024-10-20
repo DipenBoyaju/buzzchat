@@ -7,13 +7,13 @@ import { server, app } from './socket/index.js';
 import { connectDB } from './config/ConnectDB.js';
 
 dotenv.config();
+
+const app = express();
 const PORT = process.env.PORT || 8000;
 
 
-const app = express();
-
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: 'https://buzzchat-two.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
