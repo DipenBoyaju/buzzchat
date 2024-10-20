@@ -7,12 +7,20 @@ import { useState } from "react"
 const ContactList = () => {
   const { data: allUsers } = useGetAllUserDetailQuery()
   const [searchTitle, setSearchTitle] = useState("")
-  const { currentUser } = useSelector((state) => state.auth)
+  const { currentUser, onlineUser } = useSelector((state) => state.auth)
   const { data: searchResults } = useSearchUserQuery(
     searchTitle, {
     skip: !searchTitle
   }
   )
+
+  const getSortedUsers = (users) => {
+    if (!users || users.length === 0) return []
+    const onlineUsers = users.filter((user) => onlineUser.includes(user._id) && user._id !== currentUser._id)
+    const offlineUsers = users.filter((user) => !onlineUser.includes(user._id) && user._id !== currentUser._id)
+
+    return [...onlineUsers, ...offlineUsers]
+  }
 
 
   return (
@@ -33,20 +41,19 @@ const ContactList = () => {
           {
             searchTitle ? (
               searchResults?.data?.length ? (
-                searchResults.data
-                  .filter((item) => item._id !== currentUser._id)
-                  .map((item) => (
-                    <ContactListItem users={item} key={item._id} />
-                  ))
+                getSortedUsers(searchResults.data).map((item) => (
+                  <ContactListItem users={item} key={item._id} />
+                ))
               ) : (
                 <div className="col-span-3 text-center text-gray-600 dark:text-gray-300">
                   No users found
                 </div>
               )
-            ) :
-              allUsers?.user?.filter(item => item._id !== currentUser._id).map((item) => (
+            ) : (
+              getSortedUsers(allUsers?.user).map((item) => (
                 <ContactListItem users={item} key={item._id} />
               ))
+            )
           }
 
         </div>

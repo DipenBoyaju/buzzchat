@@ -5,7 +5,7 @@ import darkbg from '../assets/images/darkBackground.jpg'
 import { BsFillChatTextFill } from "react-icons/bs";
 import { useEffect, useRef, useState } from 'react';
 // import { useSelector } from 'react-redux';
-import pp from "../assets/images/pp1.jpg"
+import pp from "../assets/images/maleprofile.png"
 import { RxDotsHorizontal } from "react-icons/rx";
 import { RiSendPlane2Fill } from "react-icons/ri";
 import { BsFillImageFill } from "react-icons/bs";

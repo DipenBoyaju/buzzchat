@@ -35,3 +35,7 @@ connectDB()
     console.error('Failed to connect to MongoDB. Server not started.', error);
     process.exit(1);
   });
+
+app.use('/', (req, res) => {
+  res.send('<h1>welcom to server</h1>')
+})
