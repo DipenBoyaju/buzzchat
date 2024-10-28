@@ -13,9 +13,8 @@ const ChatPage = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     const socketConnection = io(baseUrl, {
-      auth: {
-        token: token
-      }
+      auth: { token: token },
+      transports: ['websocket']
     })
 
     socketConnection.on('onlineUser', (data) => {
